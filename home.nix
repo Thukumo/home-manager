@@ -34,44 +34,14 @@
   programs.neovim = {
     enable = true;
     plugins = with pkgs.vimPlugins; [
-      lazy-nvim
       (pkgs.vimUtils.buildVimPlugin {
         name = "hellshake-yano.vim";
-        src = builtins.fetchGit {
-         url = "https://github.com/nekowasabi/hellshake-yano.vim";
-         rev = "294a171e2fd8259d71c6fcc2e448979747a85cca";
+          src = builtins.fetchGit {
+          url = "https://github.com/nekowasabi/hellshake-yano.vim";
+          rev = "294a171e2fd8259d71c6fcc2e448979747a85cca";
         };
       })
     ];
-    extraConfig = ''
-let g:hellshake_yano = {
-      \ 'useJapanese': v:true,
-      \ 'useTinySegmmenter': v:true,
-      \ 'useHintGroups': v:true,
-      \ 'perKeyMotionCount': {
-      \   'w': 1,
-      \   'b': 1,
-      \   'e': 1,
-      \   'h': 2,
-      \   'j': 2,
-      \   'k': 2,
-      \   'l': 2,
-      \ },
-      \ 'perKeyMinLength': {
-      \   'v': 1,
-      \   'w': 3,
-      \   'b': 3,
-      \   'e': 2,
-      \ },
-      \ }
-lua << EOF
-require("lazy").setup({
-  { "hellshake-yano.vim" },
-  -- { "nvim-treesitter/nvim-treesitter" },
-})
-
-EOF
-  '';
   };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
