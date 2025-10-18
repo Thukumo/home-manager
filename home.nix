@@ -21,7 +21,7 @@
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
-    pkgs.neovim
+    # pkgs.neovim
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -36,6 +36,45 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
   ];
+  programs.neovim = {
+    enable = true;
+    plugins = with pkgs.vimPlugins; [
+      (pkgs.vimUtils.buildVimPlugin {
+        name = "hellshake-yano";
+	src = builtins.fetchGit {
+	  url = "https://github.com/nekowasabi/hellshake-yano.vim";
+	  rev = "294a171e2fd8259d71c6fcc2e448979747a85cca";
+	};
+      })
+    ];
+    extraConfig = ''
+      lua << EOF
+      local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+      if not vim.loop.fs_stat(lazypath) then
+        vim.fn.system({
+          "git",
+          "clone",
+          "--filter=blob:none",
+          "https://github.com/folke/lazy.nvim.git",
+          "--branch=stable", -- latest stable release
+          lazypath,
+        })
+      end
+      vim.opt.rtp:prepend(lazypath)
+
+      -- Tell lazy.nvim which plugins to load.
+      -- It will find them in the runtimepath that Home Manager created.
+      require("lazy").setup({
+        -- Since hellshake-yano doesn't have a standard name,
+        -- you might need to give it the name you want to use.
+        { "nekowasabi/hellshake-yano.vim", name = "hellshake-yano" },
+
+        -- Add other plugins here in the future
+        -- { "nvim-treesitter/nvim-treesitter" },
+      })
+      EOF
+    '';
+  };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
