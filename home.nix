@@ -34,14 +34,28 @@
   programs.neovim = {
     enable = true;
     plugins = with pkgs.vimPlugins; [
+      lualine-nvim
+      markdown-preview-nvim
       (pkgs.vimUtils.buildVimPlugin {
         name = "hellshake-yano.vim";
-          src = builtins.fetchGit {
+        src = builtins.fetchGit {
           url = "https://github.com/nekowasabi/hellshake-yano.vim";
           rev = "294a171e2fd8259d71c6fcc2e448979747a85cca";
         };
       })
+      (pkgs.vimUtils.buildVimPlugin {
+        name = "nanode.nvim";
+	src = builtins.fetchGit {
+	  url = "https://github.com/KijitoraFinch/nanode.nvim";
+	  rev = "cd85bbb5195b23adfb89a695b54e16daab259800";
+	};
+      })
     ];
+    extraLuaConfig = ''
+      require('lualine').setup()
+      require('nanode').setup({})
+    '';
+    extraConfig = "colorscheme nanode";
   };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
