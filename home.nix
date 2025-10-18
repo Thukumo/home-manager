@@ -18,11 +18,6 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    # pkgs.hello
-    # pkgs.neovim
-
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -39,41 +34,44 @@
   programs.neovim = {
     enable = true;
     plugins = with pkgs.vimPlugins; [
+      lazy-nvim
       (pkgs.vimUtils.buildVimPlugin {
-        name = "hellshake-yano";
-	src = builtins.fetchGit {
-	  url = "https://github.com/nekowasabi/hellshake-yano.vim";
-	  rev = "294a171e2fd8259d71c6fcc2e448979747a85cca";
-	};
+        name = "hellshake-yano.vim";
+        src = builtins.fetchGit {
+         url = "https://github.com/nekowasabi/hellshake-yano.vim";
+         rev = "294a171e2fd8259d71c6fcc2e448979747a85cca";
+        };
       })
     ];
     extraConfig = ''
-      lua << EOF
-      local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-      if not vim.loop.fs_stat(lazypath) then
-        vim.fn.system({
-          "git",
-          "clone",
-          "--filter=blob:none",
-          "https://github.com/folke/lazy.nvim.git",
-          "--branch=stable", -- latest stable release
-          lazypath,
-        })
-      end
-      vim.opt.rtp:prepend(lazypath)
+let g:hellshake_yano = {
+      \ 'useJapanese': v:true,
+      \ 'useTinySegmmenter': v:true,
+      \ 'useHintGroups': v:true,
+      \ 'perKeyMotionCount': {
+      \   'w': 1,
+      \   'b': 1,
+      \   'e': 1,
+      \   'h': 2,
+      \   'j': 2,
+      \   'k': 2,
+      \   'l': 2,
+      \ },
+      \ 'perKeyMinLength': {
+      \   'v': 1,
+      \   'w': 3,
+      \   'b': 3,
+      \   'e': 2,
+      \ },
+      \ }
+lua << EOF
+require("lazy").setup({
+  { "hellshake-yano.vim" },
+  -- { "nvim-treesitter/nvim-treesitter" },
+})
 
-      -- Tell lazy.nvim which plugins to load.
-      -- It will find them in the runtimepath that Home Manager created.
-      require("lazy").setup({
-        -- Since hellshake-yano doesn't have a standard name,
-        -- you might need to give it the name you want to use.
-        { "nekowasabi/hellshake-yano.vim", name = "hellshake-yano" },
-
-        -- Add other plugins here in the future
-        -- { "nvim-treesitter/nvim-treesitter" },
-      })
-      EOF
-    '';
+EOF
+  '';
   };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
