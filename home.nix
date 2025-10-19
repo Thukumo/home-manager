@@ -39,6 +39,7 @@
     enable = true;
     plugins = with pkgs.vimPlugins; [
       nvim-autopairs
+      nvim-treesitter
       lualine-nvim
       denops-vim
       markdown-preview-nvim
@@ -92,7 +93,6 @@
         japaneseMinWordLength = 3,
         segmenterThreshold = 4,
         japaneseMergeThreshold = 4,
-        debugMode = true,
       }
     '';
     extraConfig = ''
