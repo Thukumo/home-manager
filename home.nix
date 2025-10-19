@@ -17,11 +17,12 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = [
+  home.packages = with pkgs; [
     # hellshake-yano用
-    pkgs.deno
+    deno
 
-    pkgs.lazygit
+    lazygit
+
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -43,7 +44,7 @@
       denops-vim
       markdown-preview-nvim
       hlchunk-nvim
-      # hlchunkの依存プラグイン(本来なくても動きそうだけど...?)
+      # hlchunkの依存プラグイン
       # とりあえず対応してる全言語のパーサを入れておく
       nvim-treesitter.withAllGrammars
       
