@@ -18,6 +18,7 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
+    pkgs.deno
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -35,7 +36,9 @@
     enable = true;
     plugins = with pkgs.vimPlugins; [
       lualine-nvim
+      denops-vim
       markdown-preview-nvim
+      hlchunk-nvim
       (pkgs.vimUtils.buildVimPlugin {
         name = "hellshake-yano.vim";
         src = builtins.fetchGit {
@@ -54,8 +57,46 @@
     extraLuaConfig = ''
       require('lualine').setup()
       require('nanode').setup({})
+      require('hlchunk').setup({})
+
+      vim.g.hellshake_yano = {
+        useJapanese = true,
+        useHintGroups = true,
+        highlightSelected = true,
+        useNumericMultiCharHints = true,
+        enableTinySegmenter = true,
+        singleCharKeys = "ASDFGNM@;,.",
+        multiCharKeys = "BCEIOPQRTUVWXYZ",
+        highlightHintMarker = {bg = "black", fg = "#57FD14"},
+        highlightHintMarkerCurrent = {bg = "Red", fg = "White"},
+        perKeyMinLength = {
+          w = 3,
+          b = 3,
+          e = 3,
+        },
+        defaultMinWordLength = 3,
+        perKeyMotionCount = {
+          w = 1,
+          b = 1,
+          e = 1,
+          h = 2,
+          j = 2,
+          k = 2,
+          l = 2,
+        },
+        motionCount = 3,
+        japaneseMinWordLength = 3,
+        segmenterThreshold = 4,
+        japaneseMergeThreshold = 4,
+        debugMode = true,
+      }
+
+      vim.cmd("autocmd VimEnter * HellshakeYanoEnable")
     '';
-    extraConfig = "colorscheme nanode";
+    extraConfig = ''
+      set termguicolors
+      colorscheme nanode
+    '';
   };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
