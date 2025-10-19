@@ -61,8 +61,15 @@
     ];
     extraLuaConfig = ''
       require('lualine').setup()
-      require('hlchunk').setup({})
       require('nvim-autopairs').setup {}
+      require('hlchunk').setup({
+        chunk = {
+          enable = true
+        },
+        indent = {
+          enable = true
+        },
+      })
 
       vim.g.hellshake_yano = {
         useJapanese = true,
