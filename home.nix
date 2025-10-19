@@ -18,7 +18,10 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
+    # hellshake-yano用
     pkgs.deno
+
+    pkgs.lazygit
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -35,6 +38,7 @@
   programs.neovim = {
     enable = true;
     plugins = with pkgs.vimPlugins; [
+      nvim-autopairs
       lualine-nvim
       denops-vim
       markdown-preview-nvim
@@ -56,8 +60,8 @@
     ];
     extraLuaConfig = ''
       require('lualine').setup()
-      require('nanode').setup({})
       require('hlchunk').setup({})
+      require('nvim-autopairs').setup {}
 
       vim.g.hellshake_yano = {
         useJapanese = true,
@@ -90,11 +94,8 @@
         japaneseMergeThreshold = 4,
         debugMode = true,
       }
-
-      vim.cmd("autocmd VimEnter * HellshakeYanoEnable")
     '';
     extraConfig = ''
-      set termguicolors
       colorscheme nanode
     '';
   };
