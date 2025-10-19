@@ -23,6 +23,7 @@
 
     lazygit
     nerd-fonts.adwaita-mono
+    vlc
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -37,11 +38,30 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
   ];
+  home.shell.enableFishIntegration = true;
   programs.foot = {
     enable = true;
     settings = {
       main = {
         font = "Adwaita Mono Nerd Font:size=12";
+      };
+    };
+  };
+  programs.yazi = {
+    enable = true;
+    settings = {
+      opener = {
+        edit = [
+          {
+            run = ''nvim "$@"'';
+            block = true;
+          }
+        ];
+        play = [
+          {
+            run = ''vlc "$@"'';
+          }
+        ];
       };
     };
   };
