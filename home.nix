@@ -39,12 +39,16 @@
     enable = true;
     plugins = with pkgs.vimPlugins; [
       nvim-autopairs
-      nvim-treesitter
       lualine-nvim
       denops-vim
       markdown-preview-nvim
       hlchunk-nvim
+      # hlchunkの依存プラグイン(本来なくても動きそうだけど...?)
+      # とりあえず対応してる全言語のパーサを入れておく
+      nvim-treesitter.withAllGrammars
+      
       (pkgs.vimUtils.buildVimPlugin {
+
         name = "hellshake-yano.vim";
         src = builtins.fetchGit {
           url = "https://github.com/nekowasabi/hellshake-yano.vim";
@@ -53,15 +57,27 @@
       })
       (pkgs.vimUtils.buildVimPlugin {
         name = "nanode.nvim";
-	src = builtins.fetchGit {
-	  url = "https://github.com/KijitoraFinch/nanode.nvim";
-	  rev = "cd85bbb5195b23adfb89a695b54e16daab259800";
-	};
+        src = builtins.fetchGit {
+          url = "https://github.com/KijitoraFinch/nanode.nvim";
+          rev = "cd85bbb5195b23adfb89a695b54e16daab259800";
+        };
       })
     ];
     extraLuaConfig = ''
+      vim.opt.expandtab = true
+      vim.opt.tabstop = 2
+      vim.opt.shiftwidth = 2
       require('lualine').setup()
       require('nvim-autopairs').setup {}
+      require('nvim-treesitter.configs').setup {
+        indent = {
+          enable = true,
+        },
+        highlight = {
+          enable = true,
+          additional_vim_regex_highlighting = false,
+        },
+      }
       require('hlchunk').setup({
         chunk = {
           enable = true
@@ -69,8 +85,10 @@
         indent = {
           enable = true
         },
+        line_num = {
+          enable = true
+        },
       })
-
       vim.g.hellshake_yano = {
         useJapanese = true,
         useHintGroups = true,
