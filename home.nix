@@ -22,6 +22,7 @@
     deno
 
     lazygit
+    nerd-fonts.adwaita-mono
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -36,6 +37,14 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
   ];
+  programs.foot = {
+    enable = true;
+    settings = {
+      main = {
+        font = "Adwaita Mono Nerd Font:size=12";
+      };
+    };
+  };
   programs.neovim = {
     enable = true;
     plugins = with pkgs.vimPlugins; [
