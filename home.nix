@@ -95,13 +95,20 @@
       markdown-preview-nvim
       nvim-treesitter-context
       vim-repeat
+      barbar-nvim
+      # barbar.nvimの(任意)依存プラグイン
+      nvim-web-devicons
+
       dropbar-nvim
+      trouble-nvim
       hlchunk-nvim
-      zen-mode-nvim
-      tokyonight-nvim
       # hlchunkの依存プラグイン
       # とりあえず対応してる全言語のパーサを入れとく
       nvim-treesitter.withAllGrammars
+
+      zen-mode-nvim
+      tokyonight-nvim
+ 
 
       nvim-lspconfig
 
@@ -115,17 +122,6 @@
       cmp-path
       luasnip
       cmp_luasnip
-
-      (pkgs.vimUtils.buildVimPlugin {
-        name = "barbar.nvim";
-        src = builtins.fetchGit {
-          url = "https://github.com/romgrk/barbar.nvim";
-          rev = "549ee11d97057eae207bafa2c23c315942cca097";
-        };
-        doCheck=false;
-      })
-      # barbar.nvimの(任意)依存プラグイン
-      nvim-web-devicons
 
       (pkgs.vimUtils.buildVimPlugin {
         name = "hellshake-yano.vim";
@@ -148,14 +144,14 @@
       #     rev = "996f95e4105d053a163437e19a40bd2ea10abeb2";
       #   };
       # })
-      (pkgs.vimUtils.buildVimPlugin {
-        name = "trouble.vim";
-        src = builtins.fetchGit {
-          url = "https://github.com/folke/trouble.nvim";
-          rev = "c098362fe603d3922095e7db595961e020bdf2d0";
-        };
-        doCheck=false;
-      })
+      # (pkgs.vimUtils.buildVimPlugin {
+      #   name = "trouble.vim";
+      #   src = builtins.fetchGit {
+      #     url = "https://github.com/folke/trouble.nvim";
+      #     rev = "c098362fe603d3922095e7db595961e020bdf2d0";
+      #   };
+      #   doCheck=false;
+      # })
       (pkgs.vimUtils.buildVimPlugin {
         name = "accelerated-jk.nvim";
         src = builtins.fetchGit {
