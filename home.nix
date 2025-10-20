@@ -70,15 +70,9 @@
     enable = true;
     settings = {
       mgr = {
-        linemode = "mtime";
+      #   linemode = "mtime";
       };
       opener = {
-        open = [
-          {
-            mimes = "image/*";
-            run = ''feh "$@"'';
-          }
-        ];
         edit = [
           {
             run = ''nvim "$@"'';
