@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -17,6 +17,11 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
+  home.activation = {
+    parallelNoCitation = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      # ${pkgs.parallel}/bin/parallel --citatione
+    '';
+  };
   home.packages = with pkgs; [
     # neovimのプラグイン用
     deno
@@ -90,6 +95,7 @@ fi
       dropbar-nvim
       hlchunk-nvim
       zen-mode-nvim
+      tokyonight-nvim
       # hlchunkの依存プラグイン
       # とりあえず対応してる全言語のパーサを入れとく
       nvim-treesitter.withAllGrammars
@@ -114,20 +120,20 @@ fi
           rev = "294a171e2fd8259d71c6fcc2e448979747a85cca";
         };
       })
-      (pkgs.vimUtils.buildVimPlugin {
-        name = "nanode.nvim";
-        src = builtins.fetchGit {
-          url = "https://github.com/KijitoraFinch/nanode.nvim";
-          rev = "cd85bbb5195b23adfb89a695b54e16daab259800";
-        };
-      })
-      (pkgs.vimUtils.buildVimPlugin {
-        name = "tabset.vim";
-        src = builtins.fetchGit {
-          url = "https://github.com/FotiadisM/tabset.nvim";
-          rev = "996f95e4105d053a163437e19a40bd2ea10abeb2";
-        };
-      })
+      # (pkgs.vimUtils.buildVimPlugin {
+      #   name = "nanode.nvim";
+      #   src = builtins.fetchGit {
+      #     url = "https://github.com/KijitoraFinch/nanode.nvim";
+      #     rev = "cd85bbb5195b23adfb89a695b54e16daab259800";
+      #   };
+      # })
+      # (pkgs.vimUtils.buildVimPlugin {
+      #   name = "tabset.vim";
+      #   src = builtins.fetchGit {
+      #     url = "https://github.com/FotiadisM/tabset.nvim";
+      #     rev = "996f95e4105d053a163437e19a40bd2ea10abeb2";
+      #   };
+      # })
       (pkgs.vimUtils.buildVimPlugin {
         name = "trouble.vim";
         src = builtins.fetchGit {
@@ -154,7 +160,6 @@ fi
       vim.api.nvim_set_keymap('n', 'J', '<Plug>(accelerated_jk_gj)', {})
       vim.api.nvim_set_keymap('n', 'K', '<Plug>(accelerated_jk_gk)', {})
       require('nvim-autopairs').setup {}
-      require('zen-mode').toggle({})
       -- require('tabset').setup()
       require('nvim-treesitter.configs').setup {
         indent = {
@@ -185,7 +190,8 @@ fi
         enableTinySegmenter = true,
         singleCharKeys = "ASDFGNM@;,.",
         multiCharKeys = "BCEIOPQRTUVWXYZ",
-        highlightHintMarker = {bg = "black", fg = "#57FD14"},
+        -- highlightHintMarker = {bg = "yellow", fg = "#57FD14"},
+        highlightHintMarker = {bg = "yellow", fg = "Blue"},
         highlightHintMarkerCurrent = {bg = "Red", fg = "White"},
         perKeyMinLength = {
           w = 3,
@@ -207,9 +213,23 @@ fi
         segmenterThreshold = 4,
         japaneseMergeThreshold = 4,
       }
+      require('zen-mode').setup({
+        on_close = function()
+          vim.api.nvim_command('q')
+        end
+      })
+      vim.api.nvim_create_autocmd("VimEnter", {
+        pattern = "*",
+        once = true,
+        desc = "Start ZenMode on launch",
+        callback = function()
+          require("zen-mode").toggle()
+        end,
+      })
     '';
     extraConfig = ''
-      colorscheme nanode
+      "colorscheme nanode
+      colorscheme tokyonight-day
     '';
   };
 
