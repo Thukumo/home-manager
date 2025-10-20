@@ -26,6 +26,7 @@
     lazygit
     nerd-fonts.adwaita-mono
     fastfetch
+    zellij
 
     # neovimのプラグイン用
     deno
