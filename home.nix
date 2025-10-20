@@ -83,7 +83,10 @@
           url = "https://github.com/romgrk/barbar.nvim";
           rev = "549ee11d97057eae207bafa2c23c315942cca097";
         };
+        doCheck=false;
       })
+      # barbar.nvimの(任意)依存プラグイン
+      nvim-web-devicons
       (pkgs.vimUtils.buildVimPlugin {
         name = "hellshake-yano.vim";
         src = builtins.fetchGit {
@@ -125,6 +128,7 @@
           enable = true
         },
       })
+
       vim.g.hellshake_yano = {
         useJapanese = true,
         useHintGroups = true,
