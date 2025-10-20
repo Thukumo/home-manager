@@ -7,6 +7,8 @@ require('accelerated-jk').setup()
 vim.api.nvim_set_keymap('n', 'J', '<Plug>(accelerated_jk_gj)', {})
 vim.api.nvim_set_keymap('n', 'K', '<Plug>(accelerated_jk_gk)', {})
 require('nvim-autopairs').setup {}
+vim.diagnostic.config({ virtual_text = false })
+require('tiny-inline-diagnostic').setup()
 -- require('tabset').setup()
 require('nvim-treesitter.configs').setup {
   indent = {
@@ -60,16 +62,32 @@ vim.g.hellshake_yano = {
   segmenterThreshold = 4,
   japaneseMergeThreshold = 4,
 }
-require('zen-mode').setup({
-  on_close = function()
-    vim.api.nvim_command('q')
-  end
+-- vim.api.nvim_create_autocmd("VimEnter", {
+--   pattern = "*",
+--   once = true,
+--   desc = "Start ZenMode on launch",
+--   callback = function()
+--     require("zen-mode").toggle({
+--       lualine = {
+--         enabled = false
+--       },
+--     })
+--   end,
+-- })
+
+-- for idx, val in next, {"rust_analyzer"} do
+--   vim.lsp.config(val, {})
+--   vim.lsp.enable(val)
+-- end
+require('mason-lspconfig').setup({
+  -- このリストに追記する
+  ensure_installed = {
+    "rust_analyzer",
+    "nil_ls",
+    "lua_ls",
+    "clangd",
+    "gopls"
+  },
 })
-vim.api.nvim_create_autocmd("VimEnter", {
-  pattern = "*",
-  once = true,
-  desc = "Start ZenMode on launch",
-  callback = function()
-    require("zen-mode").toggle()
-  end,
-})
+
+-- Add other language servers here

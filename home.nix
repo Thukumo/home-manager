@@ -19,13 +19,14 @@
   # environment.
   home.activation = {
     parallelNoCitation = lib.hm.dag.entryAfter ["writeBoundary"] ''
-      # ${pkgs.parallel}/bin/parallel --citatione
+      # ${pkgs.parallel}/bin/parallel --citation
     '';
   };
   home.packages = with pkgs; [
     # neovimのプラグイン用
     deno
     rust-analyzer
+    wget
 
     lazygit
     nerd-fonts.adwaita-mono
@@ -47,7 +48,7 @@ else
 echo ディレクトリではありません。
 exit 2
 fi
-    '')
+'')
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -68,7 +69,16 @@ fi
   programs.yazi = {
     enable = true;
     settings = {
+      mgr = {
+        linemode = "mtime";
+      };
       opener = {
+        open = [
+          {
+            mimes = "image/*";
+            run = ''feh "$@"'';
+          }
+        ];
         edit = [
           {
             run = ''nvim "$@"'';
@@ -86,6 +96,7 @@ fi
   programs.neovim = {
     enable = true;
     plugins = with pkgs.vimPlugins; [
+      tiny-inline-diagnostic-nvim
       nvim-autopairs
       lualine-nvim
       denops-vim
@@ -101,6 +112,17 @@ fi
       nvim-treesitter.withAllGrammars
 
       nvim-lspconfig
+
+      mason-nvim
+      mason-lspconfig-nvim
+
+      # 補完エンジン
+      nvim-cmp
+      cmp-nvim-lsp
+      cmp-buffer
+      cmp-path
+      luasnip
+      cmp_luasnip
 
       (pkgs.vimUtils.buildVimPlugin {
         name = "barbar.nvim";
@@ -120,13 +142,13 @@ fi
           rev = "294a171e2fd8259d71c6fcc2e448979747a85cca";
         };
       })
-      # (pkgs.vimUtils.buildVimPlugin {
-      #   name = "nanode.nvim";
-      #   src = builtins.fetchGit {
-      #     url = "https://github.com/KijitoraFinch/nanode.nvim";
-      #     rev = "cd85bbb5195b23adfb89a695b54e16daab259800";
-      #   };
-      # })
+      (pkgs.vimUtils.buildVimPlugin {
+        name = "nanode.nvim";
+        src = builtins.fetchGit {
+          url = "https://github.com/KijitoraFinch/nanode.nvim";
+          rev = "cd85bbb5195b23adfb89a695b54e16daab259800";
+        };
+      })
       # (pkgs.vimUtils.buildVimPlugin {
       #   name = "tabset.vim";
       #   src = builtins.fetchGit {
