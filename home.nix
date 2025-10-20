@@ -23,32 +23,24 @@
     '';
   };
   home.packages = with pkgs; [
+    lazygit
+    nerd-fonts.adwaita-mono
+    fastfetch
+
     # neovimのプラグイン用
     deno
     rust-analyzer
     wget
 
-    lazygit
-    nerd-fonts.adwaita-mono
+    # yazi用
     vlc
-    fastfetch
+    feh
+
+    # md to pdf
     pandoc
     typst
     parallel
-
-    (pkgs.writeShellScriptBin "convd-md-to-pdf" ''
-#!/bin/sh
-if [ -z $1 ]; then
-echo ディレクトリへのパスを引数として与えてください。
-exit 1
-fi
-if [ -d $1 ]; then
-parallel pandoc {} --pdf-engine typst -o {.}.pdf ::: ''${1%/}/*.md
-else
-echo ディレクトリではありません。
-exit 2
-fi
-'')
+    (pkgs.writeShellScriptBin "convd-md2pdf" (builtins.readFile ./convd-md2pdf))
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
