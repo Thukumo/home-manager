@@ -18,12 +18,30 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
-    # hellshake-yano用
+    # neovimのプラグイン用
     deno
 
     lazygit
     nerd-fonts.adwaita-mono
     vlc
+    fastfetch
+    pandoc
+    typst
+    parallel
+
+    (pkgs.writeShellScriptBin "convd-md-to-pdf" ''
+#!/bin/sh
+if [ -z $1 ]; then
+  echo ディレクトリへのパスを引数として与えてください。
+  exit 1
+fi
+if [ -d $1 ]; then
+  parallel pandoc {} --pdf-engine typst -o {.}.pdf ::: ''${1%/}/*.md
+else
+  echo ディレクトリではありません。
+  exit 2
+fi
+    '')
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -31,12 +49,6 @@
     # # fonts?
     # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
 
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
   ];
   home.shell.enableFishIntegration = true;
   programs.foot = {
@@ -87,6 +99,7 @@
       })
       # barbar.nvimの(任意)依存プラグイン
       nvim-web-devicons
+
       (pkgs.vimUtils.buildVimPlugin {
         name = "hellshake-yano.vim";
         src = builtins.fetchGit {
