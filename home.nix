@@ -86,7 +86,7 @@ fi
       markdown-preview-nvim
       hlchunk-nvim
       # hlchunkの依存プラグイン
-      # とりあえず対応してる全言語のパーサを入れておく
+      # とりあえず対応してる全言語のパーサを入れとく
       nvim-treesitter.withAllGrammars
       
       (pkgs.vimUtils.buildVimPlugin {
@@ -116,6 +116,7 @@ fi
       })
     ];
     extraLuaConfig = ''
+      vim.opt.number = true
       vim.opt.expandtab = true
       vim.opt.tabstop = 2
       vim.opt.shiftwidth = 2
