@@ -78,7 +78,13 @@
       nvim-treesitter.withAllGrammars
       
       (pkgs.vimUtils.buildVimPlugin {
-
+        name = "barbar.nvim";
+        src = builtins.fetchGit {
+          url = "https://github.com/romgrk/barbar.nvim";
+          rev = "549ee11d97057eae207bafa2c23c315942cca097";
+        };
+      })
+      (pkgs.vimUtils.buildVimPlugin {
         name = "hellshake-yano.vim";
         src = builtins.fetchGit {
           url = "https://github.com/nekowasabi/hellshake-yano.vim";
