@@ -50,6 +50,13 @@
     # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
 
   ];
+  programs.fish = {
+    enable = true;
+    # interactiveShellInit = "fastfetch";
+  };
+  home.sessionPath = [
+    "$HOME/.cargo/bin"
+  ];
   home.shell.enableFishIntegration = true;
   programs.foot = {
     enable = true;
