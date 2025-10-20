@@ -20,6 +20,7 @@
   home.packages = with pkgs; [
     # neovimのプラグイン用
     deno
+    rust-analyzer
 
     lazygit
     nerd-fonts.adwaita-mono
@@ -32,14 +33,14 @@
     (pkgs.writeShellScriptBin "convd-md-to-pdf" ''
 #!/bin/sh
 if [ -z $1 ]; then
-  echo ディレクトリへのパスを引数として与えてください。
-  exit 1
+echo ディレクトリへのパスを引数として与えてください。
+exit 1
 fi
 if [ -d $1 ]; then
-  parallel pandoc {} --pdf-engine typst -o {.}.pdf ::: ''${1%/}/*.md
+parallel pandoc {} --pdf-engine typst -o {.}.pdf ::: ''${1%/}/*.md
 else
-  echo ディレクトリではありません。
-  exit 2
+echo ディレクトリではありません。
+exit 2
 fi
     '')
 
@@ -84,11 +85,17 @@ fi
       lualine-nvim
       denops-vim
       markdown-preview-nvim
+      nvim-treesitter-context
+      vim-repeat
+      dropbar-nvim
       hlchunk-nvim
+      zen-mode-nvim
       # hlchunkの依存プラグイン
       # とりあえず対応してる全言語のパーサを入れとく
       nvim-treesitter.withAllGrammars
-      
+
+      nvim-lspconfig
+
       (pkgs.vimUtils.buildVimPlugin {
         name = "barbar.nvim";
         src = builtins.fetchGit {
@@ -114,6 +121,28 @@ fi
           rev = "cd85bbb5195b23adfb89a695b54e16daab259800";
         };
       })
+      (pkgs.vimUtils.buildVimPlugin {
+        name = "tabset.vim";
+        src = builtins.fetchGit {
+          url = "https://github.com/FotiadisM/tabset.nvim";
+          rev = "996f95e4105d053a163437e19a40bd2ea10abeb2";
+        };
+      })
+      (pkgs.vimUtils.buildVimPlugin {
+        name = "trouble.vim";
+        src = builtins.fetchGit {
+          url = "https://github.com/folke/trouble.nvim";
+          rev = "c098362fe603d3922095e7db595961e020bdf2d0";
+        };
+        doCheck=false;
+      })
+      (pkgs.vimUtils.buildVimPlugin {
+        name = "accelerated-jk.nvim";
+        src = builtins.fetchGit {
+          url = "https://github.com/rainbowhxch/accelerated-jk.nvim";
+          rev = "8fb5dad4ccc1811766cebf16b544038aeeb7806f";
+        };
+      })
     ];
     extraLuaConfig = ''
       vim.opt.number = true
@@ -121,7 +150,12 @@ fi
       vim.opt.tabstop = 2
       vim.opt.shiftwidth = 2
       require('lualine').setup()
+      require('accelerated-jk').setup()
+      vim.api.nvim_set_keymap('n', 'J', '<Plug>(accelerated_jk_gj)', {})
+      vim.api.nvim_set_keymap('n', 'K', '<Plug>(accelerated_jk_gk)', {})
       require('nvim-autopairs').setup {}
+      require('zen-mode').toggle({})
+      -- require('tabset').setup()
       require('nvim-treesitter.configs').setup {
         indent = {
           enable = true,
