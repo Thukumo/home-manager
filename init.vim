@@ -1,3 +1,3 @@
-"colorscheme nanode
-colorscheme tokyonight-day
+colorscheme nanode
+"colorscheme tokyonight-day
 

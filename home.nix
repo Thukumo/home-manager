@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, lib, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -113,6 +113,19 @@
       mason-nvim
       mason-lspconfig-nvim
 
+      # LSP補完
+      nvim-cmp
+      cmp-nvim-lsp
+      cmp-buffer
+      cmp-path
+      cmp-cmdline
+      luasnip
+      cmp_luasnip
+
+      # ファジーファインダー
+      telescope-nvim
+      plenary-nvim
+
       (pkgs.vimUtils.buildVimPlugin {
         name = "hellshake-yano.vim";
         src = builtins.fetchGit {
@@ -156,6 +169,9 @@
       rust-analyzer
       go
       gopls
+      nil
+      clang-tools
+      lua-language-server
     ];
     extraLuaConfig = (builtins.readFile ./init.lua);
     extraConfig = (builtins.readFile ./init.vim);
