@@ -23,15 +23,11 @@
     '';
   };
   home.packages = with pkgs; [
+    git
     lazygit
     nerd-fonts.adwaita-mono
     fastfetch
     zellij
-
-    # neovimのプラグイン用
-    deno
-    rust-analyzer
-    wget
 
     # yazi用
     vlc
@@ -117,14 +113,6 @@
       mason-nvim
       mason-lspconfig-nvim
 
-      # 補完エンジン
-      nvim-cmp
-      cmp-nvim-lsp
-      cmp-buffer
-      cmp-path
-      luasnip
-      cmp_luasnip
-
       (pkgs.vimUtils.buildVimPlugin {
         name = "hellshake-yano.vim";
         src = builtins.fetchGit {
@@ -161,6 +149,13 @@
           rev = "8fb5dad4ccc1811766cebf16b544038aeeb7806f";
         };
       })
+    ];
+    extraPackages = with pkgs; [
+      deno
+      wget
+      rust-analyzer
+      go
+      gopls
     ];
     extraLuaConfig = (builtins.readFile ./init.lua);
     extraConfig = (builtins.readFile ./init.vim);
