@@ -173,8 +173,8 @@
       clang-tools
       lua-language-server
     ];
-    extraLuaConfig = (builtins.readFile ./init.lua);
-    extraConfig = (builtins.readFile ./init.vim);
+    extraLuaConfig = (builtins.readFile nvim/init.lua);
+    extraConfig = (builtins.readFile nvim/init.vim);
   };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
