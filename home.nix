@@ -66,7 +66,7 @@
     enable = true;
     settings = {
       mgr = {
-      #   linemode = "mtime";
+        #   linemode = "mtime";
       };
       opener = {
         edit = [
@@ -106,7 +106,7 @@
 
       zen-mode-nvim
       tokyonight-nvim
- 
+
 
       nvim-lspconfig
 
@@ -147,14 +147,6 @@
       #     rev = "996f95e4105d053a163437e19a40bd2ea10abeb2";
       #   };
       # })
-      # (pkgs.vimUtils.buildVimPlugin {
-      #   name = "trouble.vim";
-      #   src = builtins.fetchGit {
-      #     url = "https://github.com/folke/trouble.nvim";
-      #     rev = "c098362fe603d3922095e7db595961e020bdf2d0";
-      #   };
-      #   doCheck=false;
-      # })
       (pkgs.vimUtils.buildVimPlugin {
         name = "accelerated-jk.nvim";
         src = builtins.fetchGit {
@@ -164,6 +156,7 @@
       })
     ];
     extraPackages = with pkgs; [
+      watchexec
       deno
       wget
       rust-analyzer

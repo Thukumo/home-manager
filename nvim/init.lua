@@ -118,9 +118,9 @@ cmp.setup({
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
   }, {
-    { name = 'buffer' },
-    { name = 'path' },
-  })
+      { name = 'buffer' },
+      { name = 'path' },
+    })
 })
 
 -- Set up cmdline completion
@@ -136,8 +136,8 @@ cmp.setup.cmdline(':', {
   sources = cmp.config.sources({
     { name = 'path' }
   }, {
-    { name = 'cmdline' }
-  })
+      { name = 'cmdline' }
+    })
 })
 
 -- Set up capabilities with cmp_nvim_lsp
@@ -170,14 +170,13 @@ local on_attach = function(client, bufnr)
 end
 
 require("mason-lspconfig").setup({
-  ensure_installed = {
-    "rust_analyzer",
-    "nil_ls",
-    "lua_ls",
-    "clangd",
-    "gopls",
-    "denols", -- for deno
-  },
+
+  --   "nil_ls",
+  --   "lua_ls",
+  --   "clangd",
+  --   "gopls",
+  --   "denols", -- for deno
+  -- },
   handlers = {
     -- Default handler for servers
     function (server_name)
