@@ -27,6 +27,7 @@
     lazygit
     nerd-fonts.adwaita-mono
     fastfetch
+    btop
     zellij
 
     # yazi用
