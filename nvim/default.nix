@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
- programs.neovim = {
+  programs.neovim = {
     enable = true;
     plugins = with pkgs.vimPlugins; [
       tiny-inline-diagnostic-nvim

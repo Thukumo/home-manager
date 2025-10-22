@@ -3,11 +3,10 @@
 {
  home.activation = {
     parallelNoCitation = lib.hm.dag.entryAfter ["writeBoundary"] ''
-      # ${pkgs.parallel}/bin/parallel --citation
+      ${pkgs.parallel}/bin/parallel --citation
     '';
   };
   home.packages = with pkgs; [
-    # md to pdf
     pandoc
     typst
     parallel

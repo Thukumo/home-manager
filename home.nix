@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -27,6 +27,7 @@
   imports = [
     ./nvim
     ./convd-md2pdf
+    ./podman.nix
     ./shell.nix
   ];
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
