@@ -17,33 +17,16 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.activation = {
-    parallelNoCitation = lib.hm.dag.entryAfter ["writeBoundary"] ''
-      # ${pkgs.parallel}/bin/parallel --citation
-    '';
-  };
   home.packages = with pkgs; [
     ffmpeg
     yt-dlp
 
     webcord
     xfce.thunar
-
-    # md to pdf
-    pandoc
-    typst
-    parallel
-    (pkgs.writeShellScriptBin "convd-md2pdf" (builtins.readFile ./convd-md2pdf))
-
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
-
   ];
   imports = [
     ./nvim
+    ./convd-md2pdf
     ./shell.nix
   ];
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
