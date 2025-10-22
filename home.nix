@@ -25,10 +25,27 @@
   home.packages = with pkgs; [
     git
     lazygit
+    gh
+
     nerd-fonts.adwaita-mono
     fastfetch
     btop
+    gotop
+    speedtest-cli
+    bluetui
     zellij
+    trash-cli
+
+    ffmpeg
+    yt-dlp
+
+    webcord
+    xfce.thunar
+
+    podman
+    podman-compose
+    podman-tui
+    # podman-desktop
 
     # yazi用
     vlc
