@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, lib, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -28,15 +28,11 @@
     gh
 
     nerd-fonts.adwaita-mono
-
-    rsync
-
     fastfetch
     btop
     gotop
     speedtest-cli
     bluetui
-    gdu
     zellij
     trash-cli
 
@@ -46,10 +42,10 @@
     webcord
     xfce.thunar
 
-    # podman本体だけ、systemctl enable --now podman.socketしたかったので管理しない
-    # あとNixpkgsのpodmanはなんか00-shortnames.confが使えないので...
+    podman
     podman-compose
-    podman-tui # ?
+    podman-tui
+    # podman-desktop
 
     # yazi用
     vlc
@@ -68,18 +64,6 @@
     # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
 
   ];
-  # i18n.inputMethod = {
-  #   type = "fcitx5";
-  #   enable = true;
-  #   fcitx5 = {
-  #     addons = with pkgs; [
-  #       fcitx5-gtk             # alternatively, kdePackages.fcitx5-qt
-  #       fcitx5-chinese-addons  # table input method support
-  #       fcitx5-nord            # a color theme
-  #     ];
-  #     waylandFrontend = true;
-  #   };
-  # };
   programs.fish = {
     enable = true;
     # interactiveShellInit = "fastfetch";
@@ -115,26 +99,6 @@
           }
         ];
       };
-    };
-  };
-  # polkitが要りそう
-  wayland.windowManager.sway = {
-    enable = true;
-    config = {
-      terminal = "foot";
-      bar = {
-        position = "top";
-        status_command = "${config.home.homeDirectory}/.config/sway/scripts/swaybar_status.sh";
-      };
-    };
-  };
-  # services.gnome.gnome-keyring.enable = true;
-  services.mako = {
-    enable = true;
-    settings = {
-      ignore-timeout = 1;
-      default-timeout = 7000;
-      max-visible = 10;
     };
   };
   programs.neovim = {
@@ -227,7 +191,6 @@
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
-    ".config/sway/sway/scripts/swaybar_status.sh".source = ./sway/swaybar_status.sh;
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
@@ -239,10 +202,6 @@
     #   org.gradle.daemon.idletimeout=3600000
     # '';
   };
-  # home.symlink.".config/autostart/electron.desktop" = {
-  #   target = "/dev/null";
-  #   force = true; # 既存のファイルを上書きする場合に追記
-  # };
 
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. These will be explicitly sourced when using a
