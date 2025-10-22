@@ -23,33 +23,11 @@
     '';
   };
   home.packages = with pkgs; [
-    git
-    lazygit
-    gh
-
-    nerd-fonts.adwaita-mono
-    fastfetch
-    btop
-    gotop
-    speedtest-cli
-    bluetui
-    zellij
-    trash-cli
-
     ffmpeg
     yt-dlp
 
     webcord
     xfce.thunar
-
-    podman
-    podman-compose
-    podman-tui
-    # podman-desktop
-
-    # yazi用
-    vlc
-    feh
 
     # md to pdf
     pandoc
@@ -66,45 +44,8 @@
   ];
   imports = [
     ./nvim
+    ./shell.nix
   ];
-  programs.fish = {
-    enable = true;
-    # interactiveShellInit = "fastfetch";
-  };
-  home.sessionPath = [
-    "$HOME/.cargo/bin"
-  ];
-  home.shell.enableFishIntegration = true;
-  programs.foot = {
-    enable = true;
-    settings = {
-      main = {
-        font = "Adwaita Mono Nerd Font:size=12";
-      };
-    };
-  };
-  programs.yazi = {
-    enable = true;
-    settings = {
-      mgr = {
-        #   linemode = "mtime";
-      };
-      opener = {
-        edit = [
-          {
-            run = ''nvim "$@"'';
-            block = true;
-          }
-        ];
-        play = [
-          {
-            run = ''vlc "$@"'';
-          }
-        ];
-      };
-    };
-  };
-
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
