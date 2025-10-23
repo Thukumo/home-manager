@@ -1,11 +1,24 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   home.packages = with pkgs; [
+    webcord
+    xfce.thunar
   ];
+  # Mattermost Desktopが$(config.home.homeDirectory)/autostart/electron.desktopを作ってきて困るので、
+  # 先に/dev/nullへのシンボリックリンクにしておく
+  xdg.configFile."autostart/electron.desktop".source = config.lib.file.mkOutOfStoreSymlink /dev/null;
   home.file = {
   };
-
+  
+  programs.fuzzel = {
+    enable = true;
+    settings = {
+      main = {
+        use-bold = true;
+      };
+    };
+  };
   services.mako = {
     enable = true;
     settings = {
@@ -14,22 +27,6 @@
       max-visible = 10;
     };
   };
-  # Home Manager can also manage your environment variables through
-  # 'home.sessionVariables'. These will be explicitly sourced when using a
-  # shell provided by Home Manager. If you don't want to manage your shell
-  # through Home Manager then you have to manually source 'hm-session-vars.sh'
-  # located at either
-  #
-  #  ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  ~/.local/state/nix/profiles/profile/etc/profile.d/hm-session-vars.sh
-  #
-  # or
-  #
-  #  /etc/profiles/per-user/tsukumo/etc/profile.d/hm-session-vars.sh
-  #
   home.sessionVariables = {
     # EDITOR = "emacs";
   };
