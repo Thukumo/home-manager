@@ -22,7 +22,8 @@
   services.mako = {
     enable = true;
     settings = {
-      ignore-timeout = true;
+      # ignore-timeout = true;
+      ignore-timeout = 1;
       default-timeout = 7000;
       max-visible = 10;
     };
