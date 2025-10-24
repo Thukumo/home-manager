@@ -19,6 +19,10 @@
     vlc
     feh
   ];
+  imports = [
+    ./nvim
+    ./convd-md2pdf
+  ];
   home.sessionPath = [
     "$HOME/.cargo/bin"
   ];

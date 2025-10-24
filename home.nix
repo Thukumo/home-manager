@@ -27,8 +27,6 @@
     yt-dlp
   ];
   imports = [
-    ./nvim
-    ./convd-md2pdf
     ./podman.nix
     ./shell.nix
     ./desktop.nix
