@@ -9,6 +9,8 @@
   # 先に/dev/nullへのシンボリックリンクにしておく
   xdg.configFile."autostart/electron.desktop".source = config.lib.file.mkOutOfStoreSymlink /dev/null;
   home.file = {
+    # 手抜きのため、ホームディレクトリ直下に.config/home-managerへのシンボリックリンクを作成する
+    "home-manager".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager";
   };
   
   programs.fuzzel = {
@@ -32,3 +34,4 @@
     # EDITOR = "emacs";
   };
 }
+

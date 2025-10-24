@@ -32,6 +32,7 @@
     ./podman.nix
     ./shell.nix
     ./desktop.nix
+    ./xremap.nix
   ];
   programs.fish.enable = true;
   # Home Manager is pretty good at managing dotfiles. The primary way to manage

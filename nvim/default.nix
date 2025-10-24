@@ -44,8 +44,6 @@
       telescope-nvim
       plenary-nvim
 
-      omnisharp-roslyn
-
       (pkgs.vimUtils.buildVimPlugin {
         name = "hellshake-yano.vim";
         src = builtins.fetchGit {
