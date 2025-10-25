@@ -6,7 +6,8 @@ modmap:
         alone: [GRAVE]
         held: [Shift_L]
       CTRL_R: ESC
-      GRAVE: ESC
+      GRAVE: Tab
+      Tab: ESC
       CapsLock: LEFTMETA
       Shift_R: LEFTMETA
       Muhenkan: Home
