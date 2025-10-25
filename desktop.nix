@@ -12,7 +12,6 @@
     # 手抜きのため、ホームディレクトリ直下に.config/home-managerへのシンボリックリンクを作成する
     "home-manager".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager";
   };
-  
   programs.fuzzel = {
     enable = true;
     settings = {

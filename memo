@@ -1,4 +1,0 @@
-# for xremap
-sudo gpasswd -a <USER> input
-echo 'KERNEL=="uinput", GROUP="input", TAG+="uaccess"' | sudo tee /etc/udev/rules.d/99-input.rules
-
