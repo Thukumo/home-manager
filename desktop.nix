@@ -5,13 +5,17 @@
     webcord
     xfce.thunar
   ];
-  # Mattermost Desktopが$(config.home.homeDirectory)/autostart/electron.desktopを作ってきて困るので、
+  # Mattermost Desktopが~/.config/autostart/electron.desktopを作ってきて困るので、
   # 先に/dev/nullへのシンボリックリンクにしておく
   xdg.configFile."autostart/electron.desktop".source = config.lib.file.mkOutOfStoreSymlink /dev/null;
   home.file = {
-    # 手抜きのため、ホームディレクトリ直下に.config/home-managerへのシンボリックリンクを作成する
+    # 手抜きのため、ホームディレクトリ直下に~/.config/home-managerへのシンボリックリンクを作成する
     "home-manager".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/.config/home-manager";
   };
+  # wayland.windowManager.sway = {
+  #   enable = true;
+  # };
+  
   programs.fuzzel = {
     enable = true;
     settings = {

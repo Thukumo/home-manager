@@ -3,8 +3,8 @@ modmap:
     remap:
       Shift_L:
         alone_timeout_millis: 150
-        alone: [GRAVE]
-        held: [Shift_L]
+        alone: GRAVE
+        held: Shift_L
       CTRL_R: ESC
       GRAVE: Tab
       Tab: ESC
