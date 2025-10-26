@@ -29,7 +29,7 @@
   ];
   imports = [
     ./podman.nix
-    ./shell.nix
+    ./shell
     ./desktop.nix
     ./xremap
   ];
