@@ -18,6 +18,8 @@
     # yazi用
     vlc
     feh
+    fd
+    ripgrep
   ];
   imports = [
     ./nvim
