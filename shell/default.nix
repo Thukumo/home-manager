@@ -41,7 +41,7 @@
     enable = true;
     settings = {
       mgr = {
-        #   linemode = "mtime";
+          linemode = "mtime";
       };
       opener = {
         edit = [
