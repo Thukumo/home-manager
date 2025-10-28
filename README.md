@@ -9,7 +9,7 @@
 
 ### 設定ファイルの配置
 
-`git clone https://github.com/thukumo/home-manager ~/.config/`
+`git clone https://github.com/thukumo/home-manager ~/.config/home-manager`
 
 ### xremap用の設定(uinputをユーザ権限で読めるようにする)
 
