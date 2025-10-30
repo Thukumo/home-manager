@@ -5,15 +5,11 @@ modmap:
         alone: GRAVE
         held: Shift_L
         free_hold: true
-      Tab:
-        held: Ctrl_L
-        free_hold: true
       CapsLock:
         alone: Esc
         held: LEFTMETA
         free_hold: true
       GRAVE: Esc
-      Ctrl_L: Alt_L
       Shift_R: LEFTMETA
       Muhenkan: Home
       Henkan: End
