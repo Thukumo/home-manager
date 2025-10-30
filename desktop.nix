@@ -15,13 +15,25 @@
   # wayland.windowManager.sway = {
   #   enable = true;
   # };
-  
+
   programs.fuzzel = {
     enable = true;
     settings = {
       main = {
         use-bold = true;
       };
+    };
+  };
+  programs.foot = {
+    enable = true;
+    settings = {
+      main = {
+        font = "Adwaita Mono Nerd Font:size=12";
+      };
+      mouse = {
+        hide-when-typing = true;
+      };
+
     };
   };
   services.mako = {

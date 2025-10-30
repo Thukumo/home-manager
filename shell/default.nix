@@ -29,14 +29,6 @@
     "$HOME/.cargo/bin"
   ];
   home.shell.enableFishIntegration = true;
-  programs.foot = {
-    enable = true;
-    settings = {
-      main = {
-        font = "Adwaita Mono Nerd Font:size=12";
-      };
-    };
-  };
   programs.yazi = {
     enable = true;
     settings = {
