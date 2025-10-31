@@ -10,6 +10,9 @@
     Service = {
       Restart = "always";
       ExecStart = "${pkgs.xremap}/bin/xremap ${config.home.homeDirectory}/.config/xremap/config.yml";
+      X-ReloadTriggers = [
+        (builtins.hashFile "sha256" ./config.yml)
+      ];
     };
     Install = {
       WantedBy = [ "default.target" ];

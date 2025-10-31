@@ -9,8 +9,15 @@ modmap:
         alone: Esc
         held: LEFTMETA
         free_hold: true
-      GRAVE: Esc
+      GRAVE: Alt_L
       Shift_R: LEFTMETA
       Muhenkan: Home
       Henkan: End
       KatakanaHiragana: End
+keymap:
+  - name: power
+    exact_match: true
+    remap:
+      Ctrl-Shift-P: KEY_POWER
+      Ctrl-Shift-R: KEY_RESTART
+
