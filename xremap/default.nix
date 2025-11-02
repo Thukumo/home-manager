@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   home.packages = with pkgs; [
@@ -6,6 +6,19 @@
     wtype
   ];
   xdg.configFile."xremap/config.yml".source = ./config.yml;
+  home.file = {
+    "hoge.yaml".text = (import ./gen_yaml.nix { 
+      lib = lib; 
+      input = {
+        virtual_modifiers = ["Ctrl_R" "PROG1"];
+        modmap = [
+          {
+            name = "Global";
+          }
+        ];
+      };
+    });
+  };
   systemd.user.services.xremap = {
     Unit = {
       Description = "xremap auto start";
@@ -21,4 +34,5 @@
       WantedBy = [ "default.target" ];
     };
   };
+
 }
