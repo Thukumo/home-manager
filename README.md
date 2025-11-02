@@ -24,5 +24,5 @@
 
 ## キーバインディングについて
 
-`xremap/config.yml`を参照してください。
+`xremap/config.nix`を参照してください。
 
