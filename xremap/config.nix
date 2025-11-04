@@ -1,7 +1,7 @@
 { lib, pkgs, ... }:
 
 {
-  xdg.configFile."xremap/config.yml".source = (pkgs.formats.yaml {}).generate "hoge" {
+  xdg.configFile."xremap/config.yml".source = (pkgs.formats.yaml {}).generate "xremap-config.yml" {
     virtual_modifiers = ["Ctrl_R" "PROG1"];
     modmap = [
       {
@@ -35,8 +35,8 @@
         name = "power";
         exact_match = true;
         remap = {
-          Ctrl_L-Alt_L-Shift-P = "POWER";
-          Ctrl_L-Alt_L-Shift-R = "RESTART";
+          Ctrl-Alt-Shift-P = "POWER";
+          Ctrl-Alt-Shift-R = "RESTART";
         };
       }
       {
@@ -57,10 +57,10 @@
           ];
         };
         remap = {
-          left = "Ctrl-PageUp";
-          right = "Ctrl-PageDown";
-          up = "Alt-right";
-          down = "Alt-left";
+          up = "Ctrl-PageDown";
+          down = "Ctrl-PageUp";
+          right = "Alt-right";
+          left = "Alt-left";
         };
       }
       {
@@ -87,16 +87,17 @@
                   ]
                 ) ["" "Shift-"])
               ) (builtins.groupBy (builtins.substring 0 1) [
-                  "inu_downer"
-                  "good_story"
-                  "kawaiine"
-                  "ohayo"
                   "digicre"
+                  "good_story"
+                  "inu_downer"
+                  "kawaiine"
                   "kusa"
+                  "ohayo"
+                  "mattermost"
                   "soukamo"
                   "soukana"
                   "thonk"
-                  "mattermost"
+                  "tadashii"
                   "yosasou"
                 ])
               )
