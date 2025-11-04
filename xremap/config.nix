@@ -1,7 +1,7 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 
 {
-  xdg.configFile."xremap/config.yml".text = (import ./gen_yaml.nix {inherit lib;}) {
+  xdg.configFile."xremap/config.yml".source = (pkgs.formats.yaml {}).generate "hoge" {
     virtual_modifiers = ["Ctrl_R" "PROG1"];
     modmap = [
       {
@@ -35,8 +35,8 @@
         name = "power";
         exact_match = true;
         remap = {
-          Ctrl_L-Alt-Shift-P = "POWER";
-          Ctrl_L-Alt-Shift-R = "RESTART";
+          Ctrl_L-Alt_L-Shift-P = "POWER";
+          Ctrl_L-Alt_L-Shift-R = "RESTART";
         };
       }
       {
@@ -51,13 +51,16 @@
       {
         name = "Chromium";
         application = {
-          only = "chromium";
+          only = [
+            "chromium"
+            "google-chrome"
+          ];
         };
         remap = {
           left = "Ctrl-PageUp";
           right = "Ctrl-PageDown";
-          up = "Alt-left";
-          down = "Alt-right";
+          up = "Alt-right";
+          down = "Alt-left";
         };
       }
       {
@@ -66,22 +69,23 @@
           (lib.lists.flatten 
             (builtins.attrValues 
               (builtins.mapAttrs (
-                name: value: (lib.lists.imap0 (
-                  i: val: [
+                name: (lib.zipListsWith (
+                  shift: val: [
                     {
-                      name = "Ctrl_R-${if i == 0 then "" else "Shift-"}${name}";
+                      name = "Ctrl_R-${shift}${name}";
                       value = {
                         launch = ["fish" "-c" "wtype ${val}"];
                       };
                     }
                     {
-                      name = "Ctrl_R-Alt-${if i == 0 then "" else "Shift-"}${name}";
+                      name = "Ctrl_R-Alt-${shift}${name}";
                       value = {
                         launch = ["fish" "-c" "wtype :${val}:"];
                       };
                     }
+
                   ]
-                ) value)
+                ) ["" "Shift-"])
               ) (builtins.groupBy (builtins.substring 0 1) [
                   "inu_downer"
                   "good_story"

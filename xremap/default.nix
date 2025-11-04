@@ -13,11 +13,11 @@
       Description = "xremap auto start";
     };
     Service = {
-      Restart = "always";
       ExecStart = "${pkgs.xremap}/bin/xremap --watch ${config.home.homeDirectory}/.config/xremap/config.yml";
-      X-ReloadTriggers = [
-        (builtins.hashFile "sha256" ./config.nix)
-      ];
+      Restart = "always";
+    };
+    restartTriggers = {
+      config = builtins.toString config.xdg.configFile."xremap/config.yml".source;
     };
     Install = {
       WantedBy = [ "default.target" ];
