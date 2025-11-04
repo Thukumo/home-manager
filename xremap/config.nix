@@ -77,6 +77,13 @@
                     "good_story"
                     "kawaiine"
                     "ohayo"
+                    "digicre"
+                    "kusa"
+                    "soukamo"
+                    "soukana"
+                    "thonk"
+                    "mattermost"
+                    "yosasou"
                   ])
                 )
               )
