@@ -14,7 +14,7 @@ let
               lib.concatStringsSep "\n" (builtins.map (x: "${lib.strings.replicate count "  "}- ${x}") (builtins.map (yaml_generator (count + 1) true) data))
             else
               if builtins.isAttrs data then
-                lib.strings.concatMapAttrsStringSep "\n" (name: value: "${lib.strings.replicate count "   "}${name}: ${yaml_generator (count + 1) false value}") data
+                lib.strings.concatMapAttrsStringSep "\n" (name: value: "${lib.strings.replicate count "  "}${name}: ${yaml_generator (count + 1) false value}") data
               else builtins.toString data;
     in if 0 == count || !(builtins.isAttrs data) && !(builtins.isList data) then s else if wasList && builtins.isAttrs data then lib.strings.trimWith {start = true;} s else "\n" + s;
 in yaml_generator 0 false input
