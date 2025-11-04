@@ -1,4 +1,4 @@
-{ lib, input }:
+{ lib }: input:
 let
   yaml_generator = count: wasList: data:
     let
