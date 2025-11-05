@@ -48,5 +48,13 @@
   home.sessionVariables = {
     # EDITOR = "emacs";
   };
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "x-scheme-handler/http" = [ "chromium.desktop" ];
+      "x-scheme-handler/https" = [ "chromium.desktop" ];
+      "text/html" = [ "chromium.desktop" ];
+    };
+  };
 }
 

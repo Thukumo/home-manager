@@ -49,6 +49,21 @@
         };
       }
       {
+        name = "launch";
+        exact_match = true;
+        remap = {
+          Win-C = {
+            launch = ["fish" "-c" "chromium --incognito"];
+          };
+          Win-Shift-C = {
+            launch = ["fish" "-c" "google-chrome-stable"];
+          };
+          Win-M = {
+            launch = ["fish" "-c" "mattermost-desktop"];
+          };
+        };
+      }
+      {
         name = "Chromium";
         application = {
           only = [
