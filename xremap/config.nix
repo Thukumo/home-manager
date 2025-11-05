@@ -77,8 +77,8 @@
         name = "Chromium";
         application = {
           only = [
-            "chromium"
-            "google-chrome"
+            "Chromium"
+            "Google-chrome"
           ];
         };
         remap = {

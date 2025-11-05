@@ -15,6 +15,7 @@
     Service = {
       ExecStart = "${pkgs.xremap}/bin/xremap --watch ${config.home.homeDirectory}/.config/xremap/config.yml";
       Restart = "always";
+      KillMode = "process";
     };
     restartTriggers = {
       config = builtins.toString config.xdg.configFile."xremap/config.yml".source;
