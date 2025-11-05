@@ -53,19 +53,19 @@
         exact_match = true;
         remap = {
             Win-C = {
-              launch = ["systemd-run" "--user" "--scope" "chromium" "--incognito"];
+              launch = ["systemd-run" "--user" "--scope" "chromium" "--new-window" "--incognito"];
             };
             Win-Shift-C = {
-              launch = ["systemd-run" "--user" "--scope" "google-chrome-stable"];
+              launch = ["systemd-run" "--user" "--scope" "google-chrome-stable" "--new-window"];
             };
             Win-M = {
-              launch = ["mattermost-desktop"];
+              launch = ["systemd-run" "--user" "--scope" "mattermost-desktop"];
             };
             Win-X = {
-              launch = ["systemd-run" "--user" "--scope" "chromium" "https://x.com/home"];
+              launch = ["systemd-run" "--user" "--scope" "chromium" "--new-window" "https://x.com/home"];
             };
             Win-Shift-X = {
-              launch = ["systemd-run" "--user" "--scope" "google-chrome-stable" "https://x.com/home"];
+              launch = ["systemd-run" "--user" "--scope" "google-chrome-stable" "--new-window" "https://x.com/home"];
             };
           };
       }
