@@ -53,19 +53,19 @@
         exact_match = true;
         remap = {
             Win-C = {
-              launch = ["chromium" "--incognito"];
+              launch = ["systemd-run" "--user" "--scope" "chromium" "--incognito"];
             };
             Win-Shift-C = {
-              launch = ["google-chrome-stable"];
+              launch = ["systemd-run" "--user" "--scope" "google-chrome-stable"];
             };
             Win-M = {
               launch = ["mattermost-desktop"];
             };
             Win-X = {
-              launch = ["chromium" "https://x.com/home"];
+              launch = ["systemd-run" "--user" "--scope" "chromium" "https://x.com/home"];
             };
             Win-Shift-X = {
-              launch = ["google-chrome-stable" "https://x.com/home"];
+              launch = ["systemd-run" "--user" "--scope" "google-chrome-stable" "https://x.com/home"];
             };
           };
       }
