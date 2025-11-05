@@ -51,17 +51,27 @@
       {
         name = "launch";
         exact_match = true;
-        remap = {
-          Win-C = {
-            launch = ["fish" "-c" "chromium --incognito"];
+        remap = builtins.mapAttrs
+          (_: builtins.mapAttrs
+            (_: x: ["fish" "-c" x])
+          )
+          {
+            Win-C = {
+              launch = "chromium --incognito";
+            };
+            Win-Shift-C = {
+              launch = "google-chrome-stable";
+            };
+            Win-M = {
+              launch = "mattermost-desktop";
+            };
+            Win-X = {
+              launch = "chromium https://x.com/home";
+            };
+            Win-Shift-X = {
+              launch = "google-chrome-stable https://x.com/home";
+            };
           };
-          Win-Shift-C = {
-            launch = ["fish" "-c" "google-chrome-stable"];
-          };
-          Win-M = {
-            launch = ["fish" "-c" "mattermost-desktop"];
-          };
-        };
       }
       {
         name = "Chromium";
@@ -80,9 +90,9 @@
       }
       {
         name = "digicre";
-        remap = (builtins.listToAttrs 
-          (lib.lists.flatten 
-            (builtins.attrValues 
+        remap = (builtins.listToAttrs
+          (lib.lists.flatten
+            (builtins.attrValues
               (builtins.mapAttrs (
                 name: (lib.zipListsWith (
                   shift: val: [
