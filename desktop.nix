@@ -29,11 +29,14 @@
     settings = {
       main = {
         font = "Adwaita Mono Nerd Font:size=12";
+        include = "${pkgs.fetchurl {
+          url = "https://raw.githubusercontent.com/catppuccin/foot/8d263e0e6b58a6b9ea507f71e4dbf6870aaf8507/themes/catppuccin-latte.ini";
+          hash = "sha256-aAosa4MTxbYiqbNbcqLHIAwLfrsGsny4/VnObh47qOE=";
+        }}";
       };
       mouse = {
         hide-when-typing = true;
       };
-
     };
   };
   services.mako = {
