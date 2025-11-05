@@ -51,25 +51,21 @@
       {
         name = "launch";
         exact_match = true;
-        remap = builtins.mapAttrs
-          (_: builtins.mapAttrs
-            (_: x: ["fish" "-c" x])
-          )
-          {
+        remap = {
             Win-C = {
-              launch = "chromium --incognito";
+              launch = ["chromium" "--incognito"];
             };
             Win-Shift-C = {
-              launch = "google-chrome-stable";
+              launch = ["google-chrome-stable"];
             };
             Win-M = {
-              launch = "mattermost-desktop";
+              launch = ["mattermost-desktop"];
             };
             Win-X = {
-              launch = "chromium https://x.com/home";
+              launch = ["chromium" "https://x.com/home"];
             };
             Win-Shift-X = {
-              launch = "google-chrome-stable https://x.com/home";
+              launch = ["google-chrome-stable" "https://x.com/home"];
             };
           };
       }
